@@ -36,18 +36,22 @@ data['average-wind-speed-(period)'].fillna(mean_wind_speed, inplace=True)
 
 # Exploratory Data Analysis
 st.subheader('Exploratory Data Analysis')
+
 st.write('Histograms')
 fig, ax = plt.subplots()
 data.hist(bins=30, figsize=(15, 10), ax=ax)
+plt.subplots_adjust(hspace=0.5, wspace=0.5)  # Adjust the spacing here
 st.pyplot(fig)
 
 st.write('Pair Plot')
 fig = sns.pairplot(data[['distance-to-solar-noon', 'temperature', 'wind-direction', 'wind-speed', 'sky-cover', 'power-generated']])
+fig.fig.subplots_adjust(top=0.95, bottom=0.05, left=0.05, right=0.95, hspace=0.5, wspace=0.5)  # Adjust the spacing here
 st.pyplot(fig)
 
 st.write('Box Plot')
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.boxplot(data=data, ax=ax)
+plt.subplots_adjust(top=0.95, bottom=0.05, left=0.05, right=0.95, hspace=0.5, wspace=0.5)  # Adjust the spacing here
 plt.xticks(rotation=90)
 st.pyplot(fig)
 
@@ -55,6 +59,7 @@ st.write('Correlation Matrix')
 corr_matrix = data.corr()
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+plt.subplots_adjust(top=0.95, bottom=0.05, left=0.05, right=0.95, hspace=0.5, wspace=0.5)  # Adjust the spacing here
 st.pyplot(fig)
 
 # Model Building
@@ -103,4 +108,5 @@ if st.button('Train and Evaluate'):
     ax.set_xlabel('Actual values')
     ax.set_ylabel('Predicted values')
     ax.set_title(f'Actual vs Predicted values: {selected_model}')
+    plt.subplots_adjust(top=0.95, bottom=0.05, left=0.05, right=0.95, hspace=0.5, wspace=0.5)  # Adjust the spacing here
     st.pyplot(fig)
