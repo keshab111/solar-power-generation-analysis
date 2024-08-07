@@ -37,9 +37,16 @@ data['average-wind-speed-(period)'].fillna(mean_wind_speed, inplace=True)
 # Exploratory Data Analysis
 st.subheader('Exploratory Data Analysis')
 
+# Plot histograms
 st.write('Histograms')
-fig, ax = plt.subplots()
-data.hist(bins=30, figsize=(15, 10), ax=ax)
+columns = data.columns
+fig, axs = plt.subplots(len(columns)//3 + 1, 3, figsize=(15, 10))
+axs = axs.flatten()
+
+for ax, col in zip(axs, columns):
+    ax.hist(data[col], bins=30)
+    ax.set_title(col)
+
 plt.subplots_adjust(hspace=0.5, wspace=0.5)  # Adjust the spacing here
 st.pyplot(fig)
 
